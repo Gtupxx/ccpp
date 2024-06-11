@@ -1,0 +1,215 @@
+#VRML V2.0 utf8
+DEF view1 Viewpoint { 
+ 	position 0 -5 40 
+ 	description "view1" 
+} 
+DEF view2 Viewpoint { 
+	position 100 -5 40 
+ 	description "view2" 
+} 
+Group { 
+	children [ 
+		DEF box Transform { 
+			translation 10 0 0 
+			children [ 
+ 				Shape { 
+					appearance Appearance { 
+ 						material Material { diffuseColor 1 0 0} 
+					}		 
+					geometry Box {}
+				} 
+ 				DEF touchBox TouchSensor {} 
+ 			] 
+ 		} 
+		
+		#P1
+		#huapan
+		DEF Arm Transform {
+			rotation 1.0 0.0 0.0 1.571
+			children [
+				Shape {
+					appearance Appearance {
+						material Material { diffuseColor 0.6 0.3 0}
+					}
+					geometry Cylinder {
+						radius 	3.0
+						height	0.7
+						side 	TRUE
+						bottom	TRUE
+						top 	TRUE }
+				}
+			]
+		}
+
+		#huaban
+		DEF 4ban Transform { 
+			translation 0 0 0 
+			children [ 
+ 				DEF 1ban Transform {
+					translation 5 0 0
+					scale 1.5 1.0 0.5
+					rotation 1.0 0.0 0.0 1.571
+					children [
+						Shape {
+							appearance Appearance {
+								material Material { diffuseColor 1 1 0}
+							}
+							geometry Cylinder {
+								radius 	2.0
+								height	0.5
+								side 	TRUE
+								bottom	TRUE
+								top 	TRUE }
+						}
+					]
+				},
+				Transform {
+					rotation 0.0  0.0 1.0 0.393
+					children USE 1ban
+				},
+				Transform {
+					rotation 0.0  0.0 1.0 0.786
+					children USE 1ban
+				},
+				Transform {
+					rotation 0.0  0.0 1.0 1.179
+					children USE 1ban
+				}
+ 			] 
+ 		}, 
+		Transform {
+			rotation 0.0  0.0 1.0 1.571
+			children USE 4ban
+		}, 
+		Transform {
+			rotation 0.0  0.0 1.0 3.142
+			children USE 4ban
+		}, 
+		Transform {
+			rotation 0.0  0.0 1.0 4.713
+			children USE 4ban
+		}
+
+
+		#huajing
+		DEF huajing Transform { 
+			translation 0 -10 -0.5 
+			children [ 
+				Shape {
+					appearance Appearance {
+						material Material { diffuseColor 0 1 0}
+					}
+					geometry Cylinder {
+						radius 	0.5
+						height	15
+						side 	TRUE
+						bottom	TRUE
+						top 	TRUE }
+				}
+			]
+		}
+		
+		#yezi
+		DEF yezi_1 Transform { 
+			translation 2.5 -10 -0.3 
+			scale 1.5 1.0 0.5
+			rotation 1.0 0.0 0.0 1.571
+			children [ 
+				Shape {
+					appearance Appearance {
+						material Material { diffuseColor 0 1 0}
+					}
+					geometry Cylinder {
+						radius 	1.5
+						height	0.3
+						side 	TRUE
+						bottom	TRUE
+						top 	TRUE }
+				}
+			]
+		}	
+		DEF yezi_2 Transform { 
+			translation -2.5 -10 -0.3 
+			scale 1.5 1.0 0.5
+			rotation 1.0 0.0 0.0 1.571
+			children [ 
+				Shape {
+					appearance Appearance {
+						material Material { diffuseColor 0 1 0}
+					}
+					geometry Cylinder {
+						radius 	1.5
+						height	0.3
+						side 	TRUE
+						bottom	TRUE
+						top 	TRUE }
+				}
+			]
+		}
+
+
+		#P2
+		Transform {
+			translation 100 0 0 
+			children [ 
+			USE Arm
+			USE huajing
+			USE yezi_1
+			USE yezi_2
+			]
+		}
+		DEF 4ban2 Transform { 
+			translation 100 0 0 
+			children [ 
+				DEF Armm Transform{
+				children[
+                    DEF Arm2 Transform {
+                        translation 5 0 0
+                        scale 1.5 1.0 0.5
+                        rotation 1.0 0.0 0.0 1.571
+                        children [
+                            Shape {
+                                appearance Appearance {
+                                    material Material { diffuseColor 1 0.3 0.6}
+                                }
+                                geometry Cylinder {
+                                    radius 	2.0
+                                    height	0.5
+                                    side 	TRUE
+                                    bottom	TRUE
+                                    top 	TRUE }
+                            }
+                        ]
+                    },
+                    Transform {
+                        rotation 0.0  0.0 1.0 0.393
+                        children USE Arm2
+                    },
+                    Transform {
+                        rotation 0.0  0.0 1.0 0.786
+                        children USE Arm2
+                    },
+                    Transform {
+                        rotation 0.0  0.0 1.0 1.179
+                        children USE Arm2
+                    }
+				]
+				}
+				Transform {
+					rotation 0.0  0.0 1.0 1.571
+					children USE Armm
+				},
+				Transform {
+					rotation 0.0  0.0 1.0 3.142
+					children USE Armm
+				},
+				Transform {
+					rotation 0.0  0.0 1.0 4.713
+					children USE Armm
+				}
+ 			] 
+ 		}
+			
+	]
+}
+ROUTE touchBox.isActive TO view2.set_bind
