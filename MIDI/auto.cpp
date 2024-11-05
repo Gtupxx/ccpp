@@ -14,7 +14,7 @@
 
 namespace gtup
 {
-    enum class VIRTUAL_KEY_CODE : int
+    enum class VirtualKeyCode : int
     {
         A = 0x41,
         B = 0x42,
@@ -44,32 +44,32 @@ namespace gtup
         Z = 0x5A
     };
 
-    std::unordered_map<std::string, VIRTUAL_KEY_CODE> sg_umapNoteToVKCode = {
-        {"C1", VIRTUAL_KEY_CODE::Z},
-        {"D1", VIRTUAL_KEY_CODE::X},
-        {"E1", VIRTUAL_KEY_CODE::C},
-        {"F1", VIRTUAL_KEY_CODE::V},
-        {"G1", VIRTUAL_KEY_CODE::B},
-        {"A1", VIRTUAL_KEY_CODE::N},
-        {"B1", VIRTUAL_KEY_CODE::M},
+    std::unordered_map<std::string, VirtualKeyCode> noteMap = {
+        {"C1", VirtualKeyCode::Z},
+        {"D1", VirtualKeyCode::X},
+        {"E1", VirtualKeyCode::C},
+        {"F1", VirtualKeyCode::V},
+        {"G1", VirtualKeyCode::B},
+        {"A1", VirtualKeyCode::N},
+        {"B1", VirtualKeyCode::M},
 
-        {"C2", VIRTUAL_KEY_CODE::A},
-        {"D2", VIRTUAL_KEY_CODE::S},
-        {"E2", VIRTUAL_KEY_CODE::D},
-        {"F2", VIRTUAL_KEY_CODE::F},
-        {"G2", VIRTUAL_KEY_CODE::G},
-        {"A2", VIRTUAL_KEY_CODE::H},
-        {"B2", VIRTUAL_KEY_CODE::J},
+        {"C2", VirtualKeyCode::A},
+        {"D2", VirtualKeyCode::S},
+        {"E2", VirtualKeyCode::D},
+        {"F2", VirtualKeyCode::F},
+        {"G2", VirtualKeyCode::G},
+        {"A2", VirtualKeyCode::H},
+        {"B2", VirtualKeyCode::J},
 
-        {"C3", VIRTUAL_KEY_CODE::Q},
-        {"D3", VIRTUAL_KEY_CODE::W},
-        {"E3", VIRTUAL_KEY_CODE::E},
-        {"F3", VIRTUAL_KEY_CODE::R},
-        {"G3", VIRTUAL_KEY_CODE::T},
-        {"A3", VIRTUAL_KEY_CODE::Y},
-        {"B3", VIRTUAL_KEY_CODE::U}};
+        {"C3", VirtualKeyCode::Q},
+        {"D3", VirtualKeyCode::W},
+        {"E3", VirtualKeyCode::E},
+        {"F3", VirtualKeyCode::R},
+        {"G3", VirtualKeyCode::T},
+        {"A3", VirtualKeyCode::Y},
+        {"B3", VirtualKeyCode::U}};
 
-    std::unordered_map<std::string, std::string> sg_umapCMajorToDDorian = {
+    std::unordered_map<std::string, std::string> toDorian = {
         {"C1", "B0"},
         {"C2", "B1"},
         {"C3", "B2"},
@@ -98,7 +98,7 @@ namespace gtup
         {"B2", "A2"},
         {"B3", "A0"}};
 
-    void KeyPress(gtup::VIRTUAL_KEY_CODE keyCode)
+    void KeyPress(gtup::VirtualKeyCode keyCode)
     {
         INPUT input;
         input.type = INPUT_KEYBOARD;
@@ -108,7 +108,7 @@ namespace gtup
         SendInput(1, &input, sizeof(INPUT));
     }
 
-    void KeyRelease(gtup::VIRTUAL_KEY_CODE keyCode)
+    void KeyRelease(gtup::VirtualKeyCode keyCode)
     {
         INPUT input;
         input.type = INPUT_KEYBOARD;
@@ -209,10 +209,10 @@ int main()
                     std::string dn = note;
                     if (DORIAN)
                     {
-                        dn = gtup::sg_umapCMajorToDDorian[note];
+                        dn = gtup::toDorian[note];
                     }
-                    gtup::KeyPress(gtup::sg_umapNoteToVKCode[dn]);
-                    gtup::KeyRelease(gtup::sg_umapNoteToVKCode[dn]);
+                    gtup::KeyPress(gtup::noteMap[dn]);
+                    // gtup::KeyRelease(gtup::noteMap[dn]);
                 }
                 std::this_thread::sleep_for(std::chrono::microseconds(last));
                 mutiNotes.clear();

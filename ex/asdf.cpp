@@ -7,21 +7,50 @@
  * @Description:
  *
  */
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-
-struct Point
-{
-    int x;
-    int y;
-};
-
-struct Rectangle
-{
-    Point A;
-    Point B;
-};
 
 int main()
 {
+    int n = 50;
+    int num = 0;
+    ofstream file("data.txt", ios::out | ios::ate);
+    cout.tie(0);
+    ios::sync_with_stdio(false);
+    auto start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            for (int k = 0; k < 1000; ++k)
+            {
+                file << num++ << endl; // O(1000n^2)
+            }
+        }
+    }
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
+
+    std::cout <<"O(1000n^2) "<< "Elapsed time: " << duration << " ms\n";
+
+
+    start = std::chrono::high_resolution_clock::now();
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            // for (int k = 0; k < 1000; ++k)
+            // {
+                file << num++ << endl; // O(n^2)
+            // }
+        }
+    }
+
+    stop = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count();
+
+    std::cout <<"O(n^2) "<< "Elapsed time: " << duration << " ms\n";
+
+    return 0;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include <time.h>
 
 int __FAST_IO__ = []()
 {
